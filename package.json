@@ -1,0 +1,35 @@
+{
+  "name": "studio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/my-element.es.js",
+  "exports": {
+    ".": "./dist/my-element.es.js"
+  },
+  "types": "types/my-element.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "dev": "vite src",
+    "build": "tsc && vite build src",
+    "lint": "eslint --fix"
+  },
+  "dependencies": {
+    "@codemirror/lang-html": "^6.1.0",
+    "cm6-theme-nord": "^0.2.0",
+    "codemirror": "^6.0.1",
+    "lit": "^2.2.8"
+  },
+  "devDependencies": {
+    "@app-config/vite": "^2.8.5",
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-lit": "^1.6.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.7"
+  }
+}
