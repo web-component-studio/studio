@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-@customElement('code-editor')
+@customElement('studio-code-editor')
 export class CodeEditor extends LitElement {
   static styles = [css`${unsafeCSS(codeEditorStyles)}`];
 
@@ -32,7 +32,7 @@ export class CodeEditor extends LitElement {
         basicSetup,
         langHtml(),
         nord,
-        EditorView.updateListener.of((update) => console.log(update))
+        // EditorView.updateListener.of((update: any) => console.log(update))
       ],
       parent: this.editorParent
     });

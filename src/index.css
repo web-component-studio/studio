@@ -1,0 +1,24 @@
+:root {
+  --studio-font-family: 'Inter', 'Helvetica, arial, sans-serif';
+
+}
+
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--studio-font-family);
+}
+
+#app {
+  display: grid;
+  grid-template-rows: 60vh 40vh;
+}
+
+.editor {
+  min-height: 100%;
+}
+
+.render-outlet {
+  background: #eee;
+  overflow-y: scroll;
+}
