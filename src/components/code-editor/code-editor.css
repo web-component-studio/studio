@@ -9,7 +9,6 @@
 #code-mirror-parent {
   width: 100%;
   min-height: 100%;
-  border-top: 2px solid #ccc;
 }
 
 .cm-editor {

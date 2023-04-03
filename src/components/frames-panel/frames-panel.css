@@ -18,8 +18,19 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  color: #999;
+}
+
+.frame .frame-width {
+  transition: color .200s ease-in-out, text-shadow .200s ease-in-out;
+}
+
+.frame:hover .frame-width {
+  color: #000;
+  text-shadow: 0 1px 0 currentColor;
 }
 
 iframe {
   border: 1px solid #ccc;
+  height: 100%;
 }

@@ -1,10 +1,13 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { unsafeCSS } from 'lit';
+import { EditorView, basicSetup } from "codemirror";
+import { html as langHtml } from "@codemirror/lang-html";
+import studioConfig from '../../config/config';
+import { Store } from '../../store/store';
+import { debounce } from '../../utils';
 
-import {EditorView, basicSetup} from "codemirror";
-import { html as langHtml } from "@codemirror/lang-html"
-import { nord } from 'cm6-theme-nord';
+// import { nord } from 'cm6-theme-nord';
 
 import codeEditorStyles from './code-editor.css?inline';
 
@@ -22,21 +25,21 @@ export class CodeEditor extends LitElement {
 
   @query('#code-mirror-parent') editorParent?: HTMLTextAreaElement;
 
-  @property({type: String}) intro!: string;
-
   firstUpdated() {
-
     this.#codeMirrorInstance = new EditorView({
-      doc: this.intro,
+      doc: studioConfig.exampleCode || '<button>Im a button</button>',
       extensions: [
         basicSetup,
-        langHtml(),
-        nord,
-        // EditorView.updateListener.of((update: any) => console.log(update))
+        langHtml({ extraTags: {
+          'some-tag': { globalAttrs: false,attrs: { test: ['value1'], thing: ['value2']}}
+        }}),
+        // nord,
+        EditorView.updateListener.of((update: any) => {
+          Store.code = update.state.doc.toString();
+        })
       ],
       parent: this.editorParent
     });
-
   }
 
   render() {

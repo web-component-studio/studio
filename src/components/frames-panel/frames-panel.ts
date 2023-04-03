@@ -1,10 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { unsafeCSS } from 'lit';
-import studioConfig from '../../config/config';
-import { subscribe } from '../../store';
-import { compressParams } from '../../utils';
-
+import { Store } from '../../store/store';
+import lzString from 'lz-string';
 import framesPanelStyles from './frames-panel.css?inline';
 
 declare global {
@@ -17,24 +15,22 @@ declare global {
 export class FramesPanel extends LitElement {
   static styles = [css`${unsafeCSS(framesPanelStyles)}`];
 
-  @state() params!: string;
-
-  connectedCallback() {
+  connectedCallback(){
     super.connectedCallback();
-    // subscribe(({ code }) => {
-    //   // @ts-ignore
-    //   this.params = compressParams({ code });
-    // });
+    Store.attach(this);
   }
 
   render() {
+    const urlParams = new URLSearchParams(location[Store.paramType]);
+    const frameCode = urlParams.get('code');
+
     return html`
       <div class="frames-container">
-        ${studioConfig.widths?.map((width) => {
+        ${Store.widths?.map((width) => {
           return html`
           <div class="frame">
-            <iframe width="${width}" src="/frame.html?code=${compressParams({ code: '${[1,2,3].map((index) => { return html`<p>${index}</p>`;})}'})}"></iframe>
-            <small>${width}px</small>
+            <iframe width="${width}" src="/frame.html?code=${frameCode}"></iframe>
+            <small class="frame-width">${width}px</small>
           </div>`
         })}
       </div>

@@ -5,8 +5,7 @@ import lzString from 'lz-string';
 const urlParams = new URLSearchParams(location[studioConfig.paramType]);
 const frameCode = urlParams.get('code');
 
-console.log(frameCode);
-
+console.log('Updating')
 
 let parsedCode: string = '';
 if(frameCode) {
