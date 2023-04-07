@@ -7,10 +7,13 @@ const bag = {
 
     return json ? JSON.parse(json) : undefined
   },
-  store: (data) => {
-    const json = JSON.stringify(data)
-
-    localStorage.setItem(KEY, json)
+  store: (data, stringify = false) => {
+    if(stringify) {
+      const json = JSON.stringify(data)
+      localStorage.setItem(KEY, json)
+    } else {
+      localStorage.setItem(KEY, data)
+    }
   },
 }
 

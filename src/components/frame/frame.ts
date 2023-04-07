@@ -1,11 +1,10 @@
 import { html, render } from 'lit-html';
 import studioConfig from '../../config/config';
 import lzString from 'lz-string';
+import './frame.css?inline';
 
 const urlParams = new URLSearchParams(location[studioConfig.paramType]);
 const frameCode = urlParams.get('code');
-
-console.log('Updating')
 
 let parsedCode: string = '';
 if(frameCode) {

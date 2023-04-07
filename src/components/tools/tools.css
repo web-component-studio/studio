@@ -2,25 +2,53 @@
   position: relative;
   isolation: isolate;
   z-index: 2;
+  height: 100%;
+  display: block;
+}
+
+.studio-tools-main {
+  height: 100%;
 }
 
 .toolbar {
   display: flex;
   flex-direction: column;
+  align-items: center;
   border-left: 2px solid #ccc;
   height: 100%;
 }
 
 .toolbar button {
-  width: 100%;
+  width: 90%;
   aspect-ratio: 1/1;
   appearance: none;
   border: 0;
+  border-radius: 8px;
   background: none;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: lightblue;
+}
+
+button svg {
+  width: clamp(24px, 60%, 32px);
+  aspect-ratio: 1/1;
 }
 
 .tools-primary {
   flex:1;
+  padding-top: .5rem;
+}
+
+.tools-secondary {
+  padding-bottom: .5rem;
+}
+
+.tools-primary,
+.tools-secondary {
+  width: 80%;
 }
 
 .tools-panel {
@@ -37,3 +65,5 @@
 .tools-panel.open {
   display: block;
 }
+
+

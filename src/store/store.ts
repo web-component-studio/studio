@@ -2,31 +2,47 @@ import { compressParams } from '../utils';
 import Observable from './observable';
 import studioConfig from '../config/config';
 import { bag } from './bag';
+import lzString from 'lz-string';
 
 type StudioState = {
-  code: string;
-  width: string[];
+  localStorageKey: string;
+  code: string; // regular HTML string
+  widths: string[];
   cursorPos?: number;
 }
 
 class StudioStore extends Observable {
 
-  #state: StudioState = {};
+  #state: StudioState = {
+    localStorageKey: 'wc-studio::app-data',
+    cursorPos: 0
+  };
 
   constructor() {
     super();
-    compressParams({code: this.#state.code, widths: studioConfig.widths})
-    this.#state.widths = studioConfig.widths || [320, 768, 1024];
+    const fromStorage = localStorage.getItem(this.#state.localStorageKey);
+
+    if(fromStorage) {
+      const decompressed = JSON.parse(lzString.decompressFromEncodedURIComponent(String(fromStorage)) ?? '');
+
+      this.#state.widths = decompressed.widths;
+      this.#state.code = decompressed.code;
+    } else {
+      this.#state.widths = studioConfig.widths || [320, 768, 1024];
+      this.#state.code = studioConfig.exampleCode || '<button>Im a button</button>';
+    }
+
     this.#state.paramType = studioConfig.paramType || 'search';
-    this.#state.code = compressParams({code: studioConfig.exampleCode || '<button>Im a button</button>', widths: studioConfig.widths});
   }
 
   get code() {
     return this.#state.code;
   }
   set code(newCode: string) {
+    this.#state.code = newCode;
+
     const compressed = compressParams({code: newCode, widths: this.#state.widths});
-    this.#state.code = compressed;
+
     // save to localStorage
     bag.store(compressed);
 
@@ -42,10 +58,19 @@ class StudioStore extends Observable {
   }
   set widths(widthsArray){
     this.#state.widths = widthsArray;
+
+    this.notify();
   }
 
   get paramType(){
     return this.#state.paramType;
+  }
+
+  get cursorPos() {
+    return this.#state.cursorPos
+  }
+  set cursorPos(newPos) {
+    this.#state.cursorPos = newPos;
   }
 
 }

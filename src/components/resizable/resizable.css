@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  position: relative;
+  resize: both;
+  min-height: 25vh;
+  max-height: 75vh;
+  isolation: isolate;
+}
+
+.resize-area {
+  position: absolute;
+  width: 100%;
+  height: 7px;
+  top: -4px;
+  cursor: row-resize;
+}
+
+.handle {
+  z-index: 2;
+  position: absolute;
+  background: white;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5%;
+  height: 12px;
+  border-radius: 9999px;
+  border: 1px solid #ccc;
+}
+

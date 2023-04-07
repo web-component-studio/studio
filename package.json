@@ -32,7 +32,6 @@
     "current-git-branch": "^1.1.0",
     "find-up": "^5.0.0",
     "lit": "^2.2.8",
-    "localforage": "^1.10.0",
     "lz-string": "^1.5.0",
     "read-pkg-up": "^7.0.1"
   },

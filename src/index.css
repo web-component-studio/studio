@@ -12,13 +12,12 @@ html, body {
 #app {
   display: grid;
   height: 100vh;
-  grid-template-rows: 70vh 1fr;
+  grid-template-rows: 1fr auto;
 }
 
 .editor {
   display: grid;
-  grid-template-columns: 1fr 80px;
-  min-height: 100%;
+  grid-template-columns: 1fr clamp(60px, 5vw, 80px);
   border-top: 2px solid #ccc;
 }
 
