@@ -1,10 +1,10 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { EditorView, basicSetup } from "codemirror";
-import { html as langHtml } from "@codemirror/lang-html";
-import studioConfig from '../../config/config';
+import { customElement, query } from 'lit/decorators.js';
+import { EditorView, basicSetup } from 'codemirror';
+import { html as langHtml } from '@codemirror/lang-html';
 import { Store } from '../../store/store';
 import { debounce } from '../../utils';
+import { hints } from '../../hints';
 
 // import { nord } from 'cm6-theme-nord';
 
@@ -20,19 +20,15 @@ declare global {
 export class CodeEditor extends LitElement {
   static styles = [css`${unsafeCSS(codeEditorStyles)}`];
 
-  #codeMirrorInstance!: EditorView;
-
   @query('#code-mirror-parent') editorParent?: HTMLTextAreaElement;
   @query('.resizable') resizeParent?: HTMLDivElement;
 
   firstUpdated() {
-    this.#codeMirrorInstance = new EditorView({
+    Store.editor = new EditorView({
       doc: Store.code,
       extensions: [
         basicSetup,
-        langHtml({ extraTags: {
-          'some-tag': { globalAttrs: false,attrs: { test: ['value1'], thing: ['value2']}}
-        }}),
+        langHtml({ extraTags: hints }),
         // nord,
         EditorView.updateListener.of((update: any) => {console.log(update);
           Store.cursorPos = update.state.selection.main.head;
@@ -43,10 +39,6 @@ export class CodeEditor extends LitElement {
       ],
       parent: this.editorParent
     });
-  }
-
-  testInsert(){
-    this.#codeMirrorInstance.dispatch({changes: { from: Store.cursorPos, insert: '<p>Test INSERT </p>'}})
   }
 
   render() {

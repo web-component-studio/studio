@@ -16,6 +16,7 @@
   align-items: center;
   border-left: 2px solid #ccc;
   height: 100%;
+  background: #fff;
 }
 
 .toolbar button {
@@ -57,13 +58,23 @@ button svg {
   position: absolute;
   border-left: 2px solid #ccc;
   z-index: 2;
-  left: -301px;
   width: 300px;
   height: 100%;
+  z-index: -1;
 }
 
 .tools-panel.open {
   display: block;
+  animation: open .150s ease-in-out forwards;
 }
 
+
+@keyframes open {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -301px;
+  }
+}
 

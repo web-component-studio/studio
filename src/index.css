@@ -1,6 +1,11 @@
 :root {
-  --studio-font-family: 'Inter', 'Helvetica, arial, sans-serif';
+  --studio-font-family: 'Arimo', sans-serif;
 
+  --studio-space-small: 4px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html, body {

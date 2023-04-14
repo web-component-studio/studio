@@ -18,11 +18,28 @@ export class StudioPreviewPanel extends LitElement {
     css`${unsafeCSS(previewPanelStyles)}`
   ];
 
+  get previewUrl():string {
+    const currentPath = new URL(window.location.href);
+    currentPath.pathname = '/preview/'
+    return currentPath.toString();
+  }
+
+  copyPreviewUrl(){
+    navigator.clipboard && navigator.clipboard.writeText(this.previewUrl)
+  }
 
   render() {
     return html`
       <div>
-        preview panel
+        <h3>Preview</h3>
+        <ul>
+          <li>
+            <a href=${this.previewUrl} target="_blank" title="Open preview in new window" rel="noopener noreferrer">Open Preview</a>
+          </li>
+          <li>
+            <button @click=${this.copyPreviewUrl}>Copy Link</button>
+          </li>
+        </ul>
       </div>
     `;
   }

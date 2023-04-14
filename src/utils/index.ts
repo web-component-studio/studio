@@ -25,3 +25,7 @@ export const compressParams = ({ code, widths }:CompressParamsOptions) => {
 
   return lzString.compressToEncodedURIComponent(data);
 };
+
+export const sortWidths = (a:number, b:number):number => {
+  return a-b;
+}

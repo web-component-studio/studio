@@ -1,8 +1,10 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import studioConfig from '../../config/config';
 import { unsafeCSS } from 'lit';
 import { Store } from '../../store/store';
-import lzString from 'lz-string';
+import { compressParams } from '../../utils';
 import framesPanelStyles from './frames-panel.css?inline';
 
 declare global {
@@ -16,20 +18,18 @@ export class FramesPanel extends LitElement {
   static styles = [css`${unsafeCSS(framesPanelStyles)}`];
 
   connectedCallback(){
-    super.connectedCallback();
+    super.connectedCallback()
     Store.attach(this);
   }
 
   render() {
-    const urlParams = new URLSearchParams(location[Store.paramType]);
-    const frameCode = urlParams.get('code');
-
+    console.log('STORE CODE: ',Store.code)
     return html`
       <div class="frames-container">
-        ${Store.widths?.map((width) => {
+        ${Store.visibleWidths?.map((width) => {
           return html`
           <div class="frame">
-            <iframe width="${width}" src="/frame.html?code=${frameCode}"></iframe>
+            <iframe width="${width}" src="/frame.html?env=${compressParams({code: Store.code})}" sandbox="${ifDefined(studioConfig.iframeSandbox)}"></iframe>
             <small class="frame-width">${width}px</small>
           </div>`
         })}

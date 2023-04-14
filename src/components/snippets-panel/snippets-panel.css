@@ -1,4 +1,35 @@
+.snippet-panel-inner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  background: #fff;
+}
+
+.snippet-list-container {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.snippet-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: var(--studio-space-small);
+}
+
+.snippet-filter {
+  height: 100%;
+  padding: var(--studio-space-small);
+  border-bottom: 1px solid #000;
+}
 
 input {
-  
+  appearance: none;
+  height: 100%;
+  width: 100%;
+  border: 0;
+  padding: 0 1rem;
+  outline: none;
+  font-size: 1.25rem;
 }

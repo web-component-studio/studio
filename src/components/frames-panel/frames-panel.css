@@ -31,7 +31,7 @@
 }
 
 iframe {
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
+  border-radius: 4px;
   height: 100%;
-  box-shadow: 0 2px 8px rgba(18, 21, 26, 0.3);
 }

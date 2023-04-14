@@ -6,13 +6,15 @@ interface Window {
 }
 
 declare const __GLOBAL_STUDIO_CONFIG__: StudioConfig
+declare const __STUDIO_SNIPPETS__: Snippet[];
 
 interface StudioConfig {
   components: string;
-  outputPath: string;
+  customHints?: string;
+  outputPath?: string;
   title?: string;
   paramType: 'hash' | 'search';
-  localStorageKey: string;
+  localStorageKey?: string;
   widths?: number[];
   snippets?: Snippet[];
   exampleCode?: string;
@@ -20,6 +22,12 @@ interface StudioConfig {
   viteConfig?: () => void;
   baseUrl?: string;
   iframeSandbox?: string;
+}
+
+interface Snippet {
+  name: string;
+  desc: string;
+  code: string;
 }
 
 interface RegisteredCustomElement {
