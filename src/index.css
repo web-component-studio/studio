@@ -1,8 +1,3 @@
-:root {
-  --studio-font-family: 'Arimo', sans-serif;
-
-  --studio-space-small: 4px;
-}
 
 * {
   box-sizing: border-box;
@@ -27,6 +22,6 @@ html, body {
 }
 
 .render-outlet {
-  background: #eee;
+  background: var(--studio-color-background-subdued);
   overflow-y: scroll;
 }

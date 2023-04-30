@@ -18,7 +18,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: #999;
+  font-weight: 700;
+  color: var(--studio-color-text-subdued);
 }
 
 .frame .frame-width {
@@ -26,7 +27,7 @@
 }
 
 .frame:hover .frame-width {
-  color: #000;
+  color: var(--studio-color-text-neutral);
   text-shadow: 0 1px 0 currentColor;
 }
 

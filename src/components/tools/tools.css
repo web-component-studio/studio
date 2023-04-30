@@ -68,6 +68,10 @@ button svg {
   animation: open .150s ease-in-out forwards;
 }
 
+.toolbar button {
+  color: var(--studio-color-text-neutral);
+}
+
 
 @keyframes open {
   0% {

@@ -5,8 +5,7 @@ import { html as langHtml } from '@codemirror/lang-html';
 import { Store } from '../../store/store';
 import { debounce } from '../../utils';
 import { hints } from '../../hints';
-
-// import { nord } from 'cm6-theme-nord';
+import { studioTheme } from './studio-theme';
 
 import codeEditorStyles from './code-editor.css?inline';
 
@@ -29,7 +28,7 @@ export class CodeEditor extends LitElement {
       extensions: [
         basicSetup,
         langHtml({ extraTags: hints }),
-        // nord,
+        studioTheme,
         EditorView.updateListener.of((update: any) => {console.log(update);
           Store.cursorPos = update.state.selection.main.head;
           debounce(() => {
