@@ -23,8 +23,8 @@
   left: 50%;
   transform: translateX(-50%);
   width: 5%;
-  height: 12px;
+  height: 8px;
   border-radius: 9999px;
-  border: 1px solid #ccc;
+  border: 2px solid var(--studio-color-gray-100);
 }
 

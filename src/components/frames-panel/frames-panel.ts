@@ -23,9 +23,9 @@ export class FramesPanel extends LitElement {
   }
 
   render() {
-    console.log('STORE CODE: ',Store.code)
+    const switchToCentered = Store.visibleWidths.reduce((a, b) => a + b, 0) < window.innerWidth;
     return html`
-      <div class="frames-container">
+      <div class="frames-container ${switchToCentered ? 'centered': ''}">
         ${Store.visibleWidths?.map((width) => {
           return html`
           <div class="frame">

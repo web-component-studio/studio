@@ -7,7 +7,7 @@ interface CompressParamsOptions {
   // theme?: string;
 }
 
-export function debounce(fn: () => unknown, delay = 500) {
+export function debounce(fn: (...args: any[]) => unknown, delay = 500): (...args: any[]) => unknown {
   let timeoutID: number;
   return function(...args: []){
     if(timeoutID) clearTimeout(timeoutID);

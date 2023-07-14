@@ -1,19 +1,10 @@
 {
   "name": "wc-studio",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "Design with web components. Assemble your pallette, paint your thoughts in the browser",
   "bin": {
-    "studio": "bin/cli.js"
+    "wc-studio": "bin/cli.js"
   },
-  "exports": {
-    ".": "./dist/my-element.es.js"
-  },
-  "types": "types/my-element.d.ts",
-  "files": [
-    "dist",
-    "types"
-  ],
   "scripts": {
     "dev": "vite src",
     "build": "tsc && vite build src",
@@ -33,7 +24,8 @@
     "find-up": "^5.0.0",
     "lit": "^2.2.8",
     "lz-string": "^1.5.0",
-    "read-pkg-up": "^7.0.1"
+    "read-pkg-up": "^7.0.1",
+    "vite-plugin-static-copy": "^0.16.0"
   },
   "devDependencies": {
     "@app-config/vite": "^2.8.5",

@@ -23,17 +23,22 @@ export class CodeEditor extends LitElement {
   @query('.resizable') resizeParent?: HTMLDivElement;
 
   firstUpdated() {
+    const debouncedUpdate = debounce((update: any) => {
+      console.log('CALLED')
+      Store.code = update.state.doc.toString();
+    }, 500);
+
     Store.editor = new EditorView({
       doc: Store.code,
       extensions: [
         basicSetup,
         langHtml({ extraTags: hints }),
         studioTheme,
-        EditorView.updateListener.of((update: any) => {console.log(update);
+        EditorView.updateListener.of((update: any) => {
           Store.cursorPos = update.state.selection.main.head;
-          debounce(() => {
-            Store.code = update.state.doc.toString();
-          }, 150)();
+          if(update.docChanged) {
+            debouncedUpdate(update);
+          }
         })
       ],
       parent: this.editorParent

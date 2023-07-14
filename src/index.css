@@ -6,7 +6,7 @@
 html, body {
   min-height: 100vh;
   margin: 0;
-  font-family: var(--studio-font-family);
+  font-family: var(--studio-font-body);
 }
 
 #app {
@@ -18,7 +18,7 @@ html, body {
 .editor {
   display: grid;
   grid-template-columns: 1fr clamp(60px, 5vw, 80px);
-  border-top: 2px solid #ccc;
+  border-top: 2px solid var(--studio-color-gray-100);
 }
 
 .render-outlet {
