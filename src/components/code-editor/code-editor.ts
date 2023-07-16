@@ -24,7 +24,6 @@ export class CodeEditor extends LitElement {
 
   firstUpdated() {
     const debouncedUpdate = debounce((update: any) => {
-      console.log('CALLED')
       Store.code = update.state.doc.toString();
     }, 500);
 

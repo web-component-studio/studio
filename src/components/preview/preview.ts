@@ -1,6 +1,6 @@
 import { html, render } from 'lit-html';
 import studioConfig from '../../config/config';
-import lzString from 'lz-string';
+import { decompressFromEncodedURIComponent } from '../../utils/lz-string';
 import './preview.css?inline';
 import '../error/error';
 
@@ -15,7 +15,7 @@ try {
   const frameCode = new URLSearchParams(location[studioConfig.paramType]).get('env');
   let parsedCode: string = '';
   if(frameCode) {
-    ({ code: parsedCode } = JSON.parse(lzString.decompressFromEncodedURIComponent(String(frameCode)) ?? ''));
+    ({ code: parsedCode } = JSON.parse(decompressFromEncodedURIComponent(String(frameCode)) ?? ''));
   }
   // define the template
   // Render the template to the document
