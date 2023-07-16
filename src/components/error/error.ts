@@ -1,10 +1,9 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html} from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { unsafeCSS } from 'lit';
-// import framesPanelStyles from './frames-panel.css?inline';
 
 declare global {
   interface HTMLElementTagNameMap {
+    // @ts-ignore
     'studio-frames-panel': FramesPanel
   }
 }

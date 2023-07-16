@@ -1,4 +1,4 @@
-import lzString from 'lz-string';
+import { compressToEncodedURIComponent } from "./lz-string";
 
 interface CompressParamsOptions {
   code?: string;
@@ -23,7 +23,7 @@ export const compressParams = ({ code, widths }:CompressParamsOptions) => {
     ...(widths ? { widths } : {}),
   });
 
-  return lzString.compressToEncodedURIComponent(data);
+  return compressToEncodedURIComponent(data);
 };
 
 export const sortWidths = (a:number, b:number):number => {

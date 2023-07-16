@@ -2,7 +2,7 @@ import { compressParams, sortWidths } from '../utils';
 import Observable from './observable';
 import studioConfig from '../config/config';
 import { bag } from './bag';
-import lzString from 'lz-string';
+import { decompressFromEncodedURIComponent } from 'lz-string';
 import { EditorView } from 'codemirror';
 
 type StudioState = {
@@ -36,14 +36,14 @@ class StudioStore extends Observable {
     // check code param first
     // check local storage
     if(urlEnv) {
-      const {code, widths} = JSON.parse(lzString.decompressFromEncodedURIComponent(String(urlEnv)) ?? '');
+      const {code, widths} = JSON.parse(decompressFromEncodedURIComponent(String(urlEnv)) ?? '');
       // set code from param if present
       this.#state.code = code;
       if(widths) {
         this.#state.visibleWidths = widths;
       }
     } else  if(fromStorage) {
-      const {code, widths} = JSON.parse(lzString.decompressFromEncodedURIComponent(String(fromStorage)) ?? '');
+      const {code, widths} = JSON.parse(decompressFromEncodedURIComponent(String(fromStorage)) ?? '');
 
       // set code from param if present
       this.#state.code = code;

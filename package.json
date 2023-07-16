@@ -1,6 +1,6 @@
 {
   "name": "wc-studio",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Design with web components. Assemble your pallette, paint your thoughts in the browser",
   "bin": {
     "wc-studio": "bin/cli.js"
@@ -23,7 +23,6 @@
     "current-git-branch": "^1.1.0",
     "find-up": "^5.0.0",
     "lit": "^2.2.8",
-    "lz-string": "^1.5.0",
     "read-pkg-up": "^7.0.1",
     "vite-plugin-static-copy": "^0.16.0"
   },
