@@ -3,8 +3,8 @@ import { customElement, state, query } from 'lit/decorators.js';
 import { unsafeCSS } from 'lit';
 import { snippets } from '../../snippets';
 import { Store } from '../../store/store';
-import sharedStyles from '../../assets/styles/shared.css?inline';
-import snippetsPanelStyles from './snippets-panel.css?inline';
+import sharedStyles from '../../assets/styles/shared.css';
+import snippetsPanelStyles from './snippets-panel.css';
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -1,7 +1,7 @@
 import { html, render } from 'lit-html';
 import studioConfig from '../../config/config';
 import { decompressFromEncodedURIComponent } from '../../utils/lz-string';;
-import './frame.css?inline';
+import './frame.css';
 import '../error/error';
 
 const makeTemplate = (t: string) => {

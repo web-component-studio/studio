@@ -15,7 +15,6 @@ export class FramesPanel extends LitElement {
   @property() error: any;
 
   render() {
-    console.log('error: ', this.error);
     return html`
       <div style="color: red;" class="frames-container">
         ${this.error.message}

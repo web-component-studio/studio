@@ -7,7 +7,7 @@ import { debounce } from '../../utils';
 import { hints } from '../../hints';
 import { studioTheme } from './studio-theme';
 
-import codeEditorStyles from './code-editor.css?inline';
+import codeEditorStyles from './code-editor.css';
 
 declare global {
   interface HTMLElementTagNameMap {

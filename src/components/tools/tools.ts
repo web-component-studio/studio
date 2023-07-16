@@ -2,8 +2,8 @@ import { LitElement, html, css } from 'lit';
 import { customElement, state, query } from 'lit/decorators.js';
 import { unsafeCSS } from 'lit';
 
-import sharedStyles from '../../assets/styles/shared.css?inline';
-import toolsStyles from './tools.css?inline';
+import sharedStyles from '../../assets/styles/shared.css';
+import toolsStyles from './tools.css';
 
 import '../preview-panel/preview-panel';
 import '../settings-panel/settings-panel';

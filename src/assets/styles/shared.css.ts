@@ -1,3 +1,6 @@
+import { css } from 'lit';
+
+export default css`
 * {
   box-sizing: border-box;
 }
@@ -15,3 +18,4 @@
   white-space: nowrap;
   width: 1px;
 }
+`;

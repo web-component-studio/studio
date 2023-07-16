@@ -1,3 +1,6 @@
+import { css } from 'lit';
+
+export default css`
 :host {
   display: block;
   position: relative;
@@ -27,4 +30,4 @@
   border-radius: 9999px;
   border: 2px solid var(--studio-color-gray-100);
 }
-
+`;

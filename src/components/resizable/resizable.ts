@@ -1,6 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import resizableStyles from './resizable.css?inline';
+import { customElement } from 'lit/decorators.js';
+import resizableStyles from './resizable.css';
 
 
 @customElement('resizable-element')

@@ -1,3 +1,6 @@
+import { css } from 'lit';
+
+export default css`
 .snippet-panel-inner {
   position: absolute;
   inset: 0;
@@ -33,3 +36,4 @@ input {
   outline: none;
   font-size: 1.25rem;
 }
+`;

@@ -1,3 +1,6 @@
+import { css } from 'lit';
+
+export default css`
 :host {
   font-family: var(--studio-font-family);
   display: flex;
@@ -43,3 +46,4 @@ iframe {
   border-radius: var(--studio-frame-border-radius);
   height: 100%;
 }
+`;

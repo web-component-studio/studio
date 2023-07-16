@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, state, query } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { unsafeCSS } from 'lit';
 
-import sharedStyles from '../../assets/styles/shared.css?inline';
-import settingsPanelStyles from './settings-panel.css?inline';
+import sharedStyles from '../../assets/styles/shared.css';
+import settingsPanelStyles from './settings-panel.css';
 
 declare global {
   interface HTMLElementTagNameMap {

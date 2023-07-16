@@ -5,7 +5,7 @@ import studioConfig from '../../config/config';
 import { unsafeCSS } from 'lit';
 import { Store } from '../../store/store';
 import { compressParams } from '../../utils';
-import framesPanelStyles from './frames-panel.css?inline';
+import framesPanelStyles from './frames-panel.css';
 
 declare global {
   interface HTMLElementTagNameMap {

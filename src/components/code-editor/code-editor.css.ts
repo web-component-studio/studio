@@ -1,3 +1,6 @@
+import { css } from 'lit';
+
+export default css`
 :host {
   font-family: var(--studio-font-family);
   display: flex;
@@ -15,3 +18,4 @@
   background: #fff;
   min-height: 100%;
 }
+`;

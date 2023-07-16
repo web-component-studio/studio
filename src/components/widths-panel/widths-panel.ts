@@ -2,8 +2,8 @@ import { LitElement, html, css } from 'lit';
 import { customElement, state, query } from 'lit/decorators.js';
 import { unsafeCSS } from 'lit';
 import { Store } from '../../store/store';
-import sharedStyles from '../../assets/styles/shared.css?inline';
-import widthsPanelStyles from './widths-panel.css?inline';
+import sharedStyles from '../../assets/styles/shared.css';
+import widthsPanelStyles from './widths-panel.css';
 
 declare global {
   interface HTMLElementTagNameMap {

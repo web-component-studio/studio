@@ -1,3 +1,7 @@
+import { css } from 'lit';
+
+export default css`
+
 :host {
   position: relative;
   isolation: isolate;
@@ -82,4 +86,4 @@ button svg {
     left: -301px;
   }
 }
-
+`;
