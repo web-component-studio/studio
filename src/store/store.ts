@@ -2,7 +2,7 @@ import { compressParams, sortWidths } from '../utils';
 import Observable from './observable';
 import studioConfig from '../config/config';
 import { bag } from './bag';
-import { decompressFromEncodedURIComponent } from 'lz-string';
+import { decompressFromEncodedURIComponent } from '../utils/lz-string';
 import { EditorView } from 'codemirror';
 
 type StudioState = {

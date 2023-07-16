@@ -1,6 +1,6 @@
 import { html, render } from 'lit-html';
 import studioConfig from '../../config/config';
-import { decompressFromEncodedURIComponent } from 'lz-string';
+import { decompressFromEncodedURIComponent } from '../../utils/lz-string';;
 import './frame.css?inline';
 import '../error/error';
 
