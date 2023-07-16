@@ -1,6 +1,6 @@
 {
   "name": "wc-studio",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Design with web components. Assemble your pallette, paint your thoughts in the browser",
   "bin": {
     "wc-studio": "bin/cli.js"
