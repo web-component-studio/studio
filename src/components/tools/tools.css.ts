@@ -25,7 +25,12 @@ export default css`
 }
 
 .toolbar button {
-  width: 90%;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  appearance: none;
+  color: var(--studio-color-text-neutral);
+  padding: var(--studio-spacing-medium);
   aspect-ratio: 1/1;
   appearance: none;
   border: 0;
@@ -35,15 +40,16 @@ export default css`
 }
 
 .toolbar button:hover {
-  background: lightblue;
+  background: var(--studio-color-blue-200);
 }
 
-button svg {
+.tools-icon {
   width: clamp(24px, 60%, 32px);
-  aspect-ratio: 1/1;
+  height: clamp(24px, 60%, 32px);
 }
 
 .tools-primary {
+  color: var(--studio-color-text-neutral);
   flex:1;
   padding-top: .5rem;
 }
@@ -73,9 +79,6 @@ button svg {
   animation: open .150s ease-in-out forwards;
 }
 
-.toolbar button {
-  color: var(--studio-color-text-neutral);
-}
 
 
 @keyframes open {

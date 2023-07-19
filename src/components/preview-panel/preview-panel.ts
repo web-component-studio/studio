@@ -30,8 +30,8 @@ export class StudioPreviewPanel extends LitElement {
 
   render() {
     return html`
-      <div>
-        <h3>Preview</h3>
+      <aside>
+        <h2>Preview</h2>
         <ul>
           <li>
             <a href=${this.previewUrl} target="_blank" title="Open preview in new window" rel="noopener noreferrer">Open Preview</a>
@@ -40,7 +40,7 @@ export class StudioPreviewPanel extends LitElement {
             <button @click=${this.copyPreviewUrl}>Copy Link</button>
           </li>
         </ul>
-      </div>
+      </aside>
     `;
   }
 }

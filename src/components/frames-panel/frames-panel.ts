@@ -30,7 +30,7 @@ export class FramesPanel extends LitElement {
           return html`
           <div class="frame">
             <iframe width="${width}" src="/frame.html?env=${compressParams({code: Store.code})}" sandbox="${ifDefined(studioConfig.iframeSandbox)}"></iframe>
-            <small class="frame-width">${width}px</small>
+            <span class="frame-width">${width}px</span>
           </div>`
         })}
       </div>

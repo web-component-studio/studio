@@ -30,12 +30,12 @@ export default css`
 }
 
 .frame .frame-width {
-  font-weight: 700;
   color: var(--studio-color-text-subdued);
   transition: color .200s ease-in-out, text-shadow .200s ease-in-out;
 }
 
 .frame:hover .frame-width {
+  font-weight: 500;
   color: var(--studio-color-text-neutral);
   text-shadow: 0 1px 0 currentColor;
 }
@@ -45,5 +45,17 @@ iframe {
   border: 0;
   border-radius: var(--studio-frame-border-radius);
   height: 100%;
+  animation: fadeIn ease-in 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 `;

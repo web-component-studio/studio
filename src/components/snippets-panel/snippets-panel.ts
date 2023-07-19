@@ -47,23 +47,23 @@ export class StudioSnippetsPanel extends LitElement {
 
   render() {
     return html`
-      <div class="snippet-panel-inner">
+      <aside class="snippet-panel-inner">
         <div class="snippet-filter">
           <input type="text" placeholder="Search for a snippet"/>
         </div>
         <div class="snippet-list-container">
-          <ul class="snippet-list">
+          <ul class="snippet-list" aria-label="Click a button to enable a snippet">
             ${snippets.map((snippet: Snippet, index: number) => {
               return html`<li>
                 <button @mouseenter=${(event:Event) => this.#previewSnippet(event, index)}>
-                  <p>${snippet.name}</p>
-                  <small>${snippet.desc}</small>
+                  <p class="snippet-name" >${snippet.name}</p>
+                  <span class="snippet-desc">${snippet.desc}</span>
                 </button>
               </li>`
             })}
           </ul>
         </div>
-      </div>
+      </aside>
     `;
   }
 }

@@ -6,7 +6,9 @@ export default css`
 }
 
 :host {
-  font-family: var(--studio-font-family);
+  display: block;
+  font-family: var(--studio-font-body);
+  font-size: 1rem;
 }
 
 .visually-hidden:not(:focus):not(:active) {

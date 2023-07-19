@@ -54,7 +54,9 @@ export const studioThemeBase = EditorView.theme({
     fontFamily: 'var(--studio-font-mono)',
     caretColor: cursor
   },
-
+  '&.cm-focused': {
+    outline: 'none'
+  },
   '.cm-cursor, .cm-dropCursor': {borderLeftColor: cursor},
   '&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': {
     backgroundColor: '#6699ff44'

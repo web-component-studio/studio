@@ -7,8 +7,21 @@
   --studio-font-body: 'Noto Sans', sans-serif;
   --studio-font-mono: Source Code Pro, Firacode, Hasklig, Menlo, monospace;
 
+  --studio-font-weight-reg: 400;
+  --studio-font-weight-semibold: 500;
+  --studio-font-weight-bold: 700;
+
   /** SPACING **/
-  --studio-space-small: 4px;
+  --studio-spacing-3x-small: 0.125rem;
+  --studio-spacing-2x-small: 0.25rem;
+  --studio-spacing-x-small: 0.5rem;
+  --studio-spacing-small: 0.75rem;
+  --studio-spacing-medium: 1rem;
+  --studio-spacing-large: 1.25rem;
+  --studio-spacing-x-large: 1.75rem;
+  --studio-spacing-2x-large: 2.25rem;
+  --studio-spacing-3x-large: 3rem;
+  --studio-spacing-4x-large: 4.5rem;
 
   /** COLOR **/
   /** PRIMITIVES **/
@@ -28,7 +41,6 @@
   --studio-color-gray-800: #44424D;
   --studio-color-gray-900: #34323D;
   --studio-color-gray-950: #1E1D26;
-
 
   --studio-color-blue-50: #eff6ff;
   --studio-color-blue-100: #dbeafe;

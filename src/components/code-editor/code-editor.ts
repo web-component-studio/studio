@@ -20,7 +20,6 @@ export class CodeEditor extends LitElement {
   static styles = [css`${unsafeCSS(codeEditorStyles)}`];
 
   @query('#code-mirror-parent') editorParent?: HTMLTextAreaElement;
-  @query('.resizable') resizeParent?: HTMLDivElement;
 
   firstUpdated() {
     const debouncedUpdate = debounce((update: any) => {
@@ -31,6 +30,7 @@ export class CodeEditor extends LitElement {
       doc: Store.code,
       extensions: [
         basicSetup,
+        EditorView.lineWrapping,
         langHtml({ extraTags: hints }),
         studioTheme,
         EditorView.updateListener.of((update: any) => {

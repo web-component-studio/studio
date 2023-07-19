@@ -21,9 +21,9 @@ export class StudioSettingsPanel extends LitElement {
 
   render() {
     return html`
-      <div>
-        <h3>Settings</h3>
-      </div>
+      <aside>
+        <h2>Settings</h2>
+      </aside>
     `;
   }
 }
