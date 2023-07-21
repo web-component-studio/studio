@@ -1,8 +1,8 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, state, query } from 'lit/decorators.js';
-import { unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { Store } from '../../store/store';
 import sharedStyles from '../../assets/styles/shared.css';
+import panelSharedStyles from '../../assets/styles/panel-shared.css';
 import widthsPanelStyles from './widths-panel.css';
 
 declare global {
@@ -14,8 +14,9 @@ declare global {
 @customElement('studio-widths-panel')
 export class StudioWidthsPanel extends LitElement {
   static styles = [
-    css`${unsafeCSS(sharedStyles)}`,
-    css`${unsafeCSS(widthsPanelStyles)}`
+    sharedStyles,
+    panelSharedStyles,
+    widthsPanelStyles
   ];
 
   handleWidthSelect(event: Event){

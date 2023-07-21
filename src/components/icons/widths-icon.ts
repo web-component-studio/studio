@@ -1,9 +1,8 @@
 
 
 
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { unsafeCSS } from 'lit';
 
 import sharedStyles from '../../assets/styles/shared.css';
 
@@ -16,13 +15,11 @@ declare global {
 
 @customElement('widths-icon')
 export class WidthsIcon extends LitElement {
-  static styles = [
-    css`${unsafeCSS(sharedStyles)}`
-  ];
+  static styles = [sharedStyles ];
 
   render() {
     return html`
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <clipPath id="a" fill="none">
         <rect x="1" y="4" width="6" height="16" rx="1"/>
         </clipPath>

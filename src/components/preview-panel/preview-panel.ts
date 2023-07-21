@@ -1,9 +1,10 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, state, query } from 'lit/decorators.js';
-import { unsafeCSS } from 'lit';
-
+import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import panelSharedStyles from '../../assets/styles/panel-shared.css';
 import sharedStyles from '../../assets/styles/shared.css';
 import previewPanelStyles from './preview-panel.css';
+
+import '../icons/preview-icon';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -14,8 +15,9 @@ declare global {
 @customElement('studio-preview-panel')
 export class StudioPreviewPanel extends LitElement {
   static styles = [
-    css`${unsafeCSS(sharedStyles)}`,
-    css`${unsafeCSS(previewPanelStyles)}`
+    sharedStyles,
+    panelSharedStyles,
+    previewPanelStyles
   ];
 
   get previewUrl():string {
@@ -24,7 +26,7 @@ export class StudioPreviewPanel extends LitElement {
     return currentPath.toString();
   }
 
-  copyPreviewUrl(){
+  copyPreviewUrl() {
     navigator.clipboard && navigator.clipboard.writeText(this.previewUrl)
   }
 
@@ -32,14 +34,13 @@ export class StudioPreviewPanel extends LitElement {
     return html`
       <aside>
         <h2>Preview</h2>
-        <ul>
-          <li>
-            <a href=${this.previewUrl} target="_blank" title="Open preview in new window" rel="noopener noreferrer">Open Preview</a>
-          </li>
-          <li>
-            <button @click=${this.copyPreviewUrl}>Copy Link</button>
-          </li>
-        </ul>
+        <studio-stack>
+          <a class="preview-link" href=${this.previewUrl} target="_blank" title="Open preview in new window" rel="noopener noreferrer">
+            Open Preview
+            <preview-icon></preview-icon>
+          </a>
+          <button class="copy-preview-button" @click=${this.copyPreviewUrl}>Copy Link</button>
+        </studio-stack>
       </aside>
     `;
   }

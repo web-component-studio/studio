@@ -1,8 +1,9 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, state, query } from 'lit/decorators.js';
-import { unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { snippets } from '../../snippets';
 import { Store } from '../../store/store';
+
+import panelSharedStyles from '../../assets/styles/panel-shared.css';
 import sharedStyles from '../../assets/styles/shared.css';
 import snippetsPanelStyles from './snippets-panel.css';
 
@@ -15,8 +16,9 @@ declare global {
 @customElement('studio-snippets-panel')
 export class StudioSnippetsPanel extends LitElement {
   static styles = [
-    css`${unsafeCSS(sharedStyles)}`,
-    css`${unsafeCSS(snippetsPanelStyles)}`
+    sharedStyles,
+    panelSharedStyles,
+    snippetsPanelStyles
   ];
 
 

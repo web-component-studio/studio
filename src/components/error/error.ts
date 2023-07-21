@@ -3,14 +3,12 @@ import { customElement, property } from 'lit/decorators.js';
 
 declare global {
   interface HTMLElementTagNameMap {
-    // @ts-ignore
-    'studio-frames-panel': FramesPanel
+    'studio-error': StudioError
   }
 }
 
 @customElement('studio-error')
-export class FramesPanel extends LitElement {
-  // static styles = [css`${unsafeCSS(framesPanelStyles)}`];
+export class StudioError extends LitElement {
 
   @property() error: any;
 

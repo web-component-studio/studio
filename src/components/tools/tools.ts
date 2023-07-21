@@ -1,23 +1,8 @@
-import { LitElement, html, css, TemplateResult } from 'lit';
+import { LitElement, html, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { unsafeCSS } from 'lit';
 
 import sharedStyles from '../../assets/styles/shared.css';
 import toolsStyles from './tools.css';
-
-
-// icons
-import '../icons/snippet-icon';
-import '../icons/widths-icon';
-import '../icons/preview-icon';
-import '../icons/share-icon';
-import '../icons/settings-icon';
-
-// panels
-import '../preview-panel/preview-panel';
-import '../settings-panel/settings-panel';
-import '../widths-panel/widths-panel';
-import '../snippets-panel/snippets-panel';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -36,8 +21,8 @@ const PANEL_LOOKUP: Record<string, TemplateResult> = {
 @customElement('studio-tools')
 export class StudioTools extends LitElement {
   static styles = [
-    css`${unsafeCSS(sharedStyles)}`,
-    css`${unsafeCSS(toolsStyles)}`
+    sharedStyles,
+    toolsStyles
   ];
 
   @state() panelOpen = false;

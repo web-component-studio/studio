@@ -1,3 +1,5 @@
+
+
 :root {
 
   --light: initial;
@@ -62,7 +64,7 @@
 
   --studio-color-text-neutral: var(--light, var(--studio-color-gray-950)) var(--dark, var(--studio-color-gray-050));
   --studio-color-text-subdued: var(--light, var(--studio-color-gray-300)) var(--dark, var(--studio-color-gray-200));
-
+  --studio-color-text-interactive: var(--light, var(--studio-color-blue-700)) var(--dark, var(--studio-color-blue-400));
 
 
   /** EDITOR **/
@@ -70,6 +72,7 @@
 
   --studio-color-editor-text-neutral: var(--light, var(--studio-color-gray-950)) var(--dark, var(--studio-color-gray-100));
   --studio-color-editor-text-subdued: var(--light, var(--studio-color-gray-500)) var(--dark, var(--studio-color-gray-100));
+  --studio-color-editor-text-interactive: var(--light, var(--studio-color-blue-700)) var(--dark, var(--studio-color-blue-400));
 
   /** SYNTAX HIGHLIGHT VARS **/
   --studio-color-editor-comment: var(--studio-color-editor-text-subdued);

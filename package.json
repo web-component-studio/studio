@@ -13,6 +13,7 @@
   "dependencies": {
     "@codemirror/autocomplete": "^6.4.2",
     "@codemirror/lang-html": "^6.4.2",
+    "@codemirror/lang-javascript": "^6.1.9",
     "@rollup/plugin-html": "^0.2.4",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@web/dev-server": "^0.1.34",
