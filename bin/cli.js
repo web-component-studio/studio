@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-const path = require('path');
-const commandLineArgs = require('command-line-args');
-const commandLineUsage = require('command-line-usage');
-const findUp = require('find-up');
-const lib = require('../lib');
+import {resolve, dirname} from 'path';
+import commandLineArgs from 'command-line-args';
+import commandLineUsage from 'command-line-usage';
+import { findUp } from 'find-up';
+
+import lib from '../lib/index.js';
 
 const showUsage = () => {
   console.log(
@@ -52,7 +53,7 @@ const showUsage = () => {
 
   const cwd = process.cwd();
   const configPath = args.config
-    ? path.resolve(cwd, args.config)
+    ? resolve(cwd, args.config)
     : await findUp('studio.config.js', { cwd });
 
   if (!configPath) {
@@ -62,10 +63,10 @@ const showUsage = () => {
     process.exit(1);
   }
 
-  const config = require(configPath);
+  const config = import(configPath);
 
   const studio = lib({
-    cwd: path.dirname(configPath),
+    cwd: dirname(configPath),
     ...config,
   });
 

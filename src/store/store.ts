@@ -3,11 +3,13 @@ import Observable from './observable';
 import studioConfig from '../config/config';
 import { bag } from './bag';
 import { decompressFromEncodedURIComponent } from '../utils/lz-string';
+
 import { EditorView } from 'codemirror';
 
 type StudioState = {
   localStorageKey: string;
   code: string; // regular HTML string
+  darkMode: string;
   allWidths: number[];
   visibleWidths: number[];
   cursorPos: number;
@@ -20,6 +22,7 @@ class StudioStore extends Observable {
   #state: StudioState = {
     localStorageKey: 'wc-studio::app-data',
     cursorPos: 0,
+    darkMode: studioConfig.initialMode || 'light',
     code: studioConfig.exampleCode || '<button>Im a button</button>',
     allWidths: studioConfig.widths || [320, 768, 1024],
     visibleWidths: studioConfig.widths || [320, 768, 1024],
@@ -36,17 +39,27 @@ class StudioStore extends Observable {
     // check code param first
     // check local storage
     if(urlEnv) {
-      const {code, widths} = JSON.parse(decompressFromEncodedURIComponent(String(urlEnv)) ?? '');
-      // set code from param if present
-      this.#state.code = code;
+      const {code, widths} = JSON.parse(decompressFromEncodedURIComponent(String(urlEnv)) ?? (studioConfig.exampleCode || '<button>Im a button</button>'));
+      if(code) {
+        // set code from param if present
+        this.#state.code = code;
+      } else {
+        this.#state.code = studioConfig.exampleCode || '<button>Im a button</button>';
+      }
+
       if(widths) {
         this.#state.visibleWidths = widths;
       }
     } else  if(fromStorage) {
       const {code, widths} = JSON.parse(decompressFromEncodedURIComponent(String(fromStorage)) ?? '');
 
-      // set code from param if present
-      this.#state.code = code;
+      if(code) {
+        // set code from param if present
+        this.#state.code = code;
+      } else {
+        this.#state.code = studioConfig.exampleCode || '<button>Im a button</button>';
+      }
+
     }
   }
 
@@ -105,9 +118,16 @@ class StudioStore extends Observable {
     return this.#state.cursorPos
   }
   set cursorPos(newPos) {
-    console.log('setting cursor', newPos);
-
     this.#state.cursorPos = newPos;
+  }
+
+  get darkMode() {
+    return this.#state.darkMode;
+  }
+  set darkMode(newMode: string) {
+    this.#state.darkMode = newMode;
+    console.log('STORE: ', this.#state.darkMode);
+    this.notify();
   }
 
 }

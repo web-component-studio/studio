@@ -21,16 +21,41 @@ import { history, defaultKeymap, historyKeymap, indentWithTab } from '@codemirro
 import { highlightSelectionMatches, searchKeymap } from '@codemirror/search';
 import { closeBrackets, autocompletion, closeBracketsKeymap, completionKeymap } from '@codemirror/autocomplete';
 import { lintKeymap } from '@codemirror/lint';
-
 import { EditorView } from 'codemirror';
-import { html as langHtml } from '@codemirror/lang-html';
-import { javascript } from '@codemirror/lang-javascript';
+import { LanguageSupport } from '@codemirror/language';
+import { parseMixed } from '@lezer/common';
+import { htmlPlain, autoCloseTags, htmlLanguage, htmlCompletionSourceWith } from '@codemirror/lang-html';
+import { javascriptLanguage } from '@codemirror/lang-javascript';
 
 import { studioTheme } from './studio-theme';
 
-
-
 import codeEditorStyles from './code-editor.css';
+
+const litHtml = () => {
+  const lang = htmlPlain.configure({
+    dialect: 'selfClosing',
+    wrap: parseMixed((node) => {
+      const isEmptyNode = () => node.to - node.from <= 2;
+
+      if(node.name === 'Text') {
+        return {
+          parser: javascriptLanguage.parser
+        }
+      } else if(node.name === 'AttributeValue' && !isEmptyNode()) {
+        return {
+          parser: javascriptLanguage.parser,
+          overlay: [{from: node.from + 1, to: node.to - 1}]
+        }
+      }
+
+      return null;
+    })
+  });
+  return new LanguageSupport(lang, [
+    htmlLanguage.data.of({autocomplete: htmlCompletionSourceWith({ extraTags: hints})}),
+    autoCloseTags
+  ]);
+}
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -83,8 +108,8 @@ export class CodeEditor extends LitElement {
             indentWithTab
         ]),
         EditorView.lineWrapping,
-        langHtml({ extraTags: hints }),
-        javascript(),
+        // langHtml({ extraTags: hints, autoCloseTags: true }),
+        litHtml(),
         studioTheme,
         EditorView.updateListener.of((update: any) => {
           Store.cursorPos = update.state.selection.main.head;

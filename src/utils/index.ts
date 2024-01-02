@@ -2,9 +2,8 @@ import { compressToEncodedURIComponent } from "./lz-string";
 
 interface CompressParamsOptions {
   code?: string;
-  // themes?: string[];
+  mode?: string;
   widths?: number[];
-  // theme?: string;
 }
 
 export function debounce(fn: (...args: any[]) => unknown, delay = 500): (...args: any[]) => unknown {
@@ -17,10 +16,11 @@ export function debounce(fn: (...args: any[]) => unknown, delay = 500): (...args
   }
 }
 
-export const compressParams = ({ code, widths }:CompressParamsOptions) => {
+export const compressParams = ({ code, widths, mode }:CompressParamsOptions) => {
   const data = JSON.stringify({
     ...(code ? { code } : {}),
     ...(widths ? { widths } : {}),
+    ...(mode ? { mode } : {}),
   });
 
   return compressToEncodedURIComponent(data);

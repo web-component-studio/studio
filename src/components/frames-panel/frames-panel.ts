@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { keyed } from 'lit/directives/keyed.js';
 import studioConfig from '../../config/config';
 import { Store } from '../../store/store';
 import { compressParams } from '../../utils';
@@ -17,7 +18,7 @@ export class FramesPanel extends LitElement {
   static styles = [ framesPanelStyles ];
 
   connectedCallback(){
-    super.connectedCallback()
+    super.connectedCallback();
     Store.attach(this);
   }
 
@@ -28,7 +29,7 @@ export class FramesPanel extends LitElement {
         ${Store.visibleWidths?.map((width) => {
           return html`
           <div class="frame">
-            <iframe width="${width}" src="/frame.html?env=${compressParams({code: Store.code})}" sandbox="${ifDefined(studioConfig.iframeSandbox)}"></iframe>
+            ${keyed(Store.darkMode, html`<iframe width="${width}" src="/frame.html?env=${compressParams({mode: Store.darkMode, code: Store.code})}" sandbox="${ifDefined(studioConfig.iframeSandbox)}"></iframe>`)}
             <span class="frame-width">${width}px</span>
           </div>`
         })}

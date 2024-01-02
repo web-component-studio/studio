@@ -1,4 +1,5 @@
 import { LitElement, html } from 'lit';
+import { Store } from '../../store/store';
 import { customElement } from 'lit/decorators.js';
 import sharedStyles from '../../assets/styles/shared.css';
 import panelSharedStyles from '../../assets/styles/panel-shared.css';
@@ -18,15 +19,31 @@ export class StudioSettingsPanel extends LitElement {
     settingsPanelStyles
   ];
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    Store.attach(this);
+  }
+
+  handleDarkModeToggle(event: MouseEvent) {
+    const newMode = (event.target as HTMLButtonElement).name;
+    // toggle mode on HTML element
+    if(newMode !== 'system') {
+      document.documentElement.dataset.theme = newMode;
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+    Store.darkMode = newMode;
+  }
+
 
   render() {
     return html`
       <aside>
         <h2>Theme</h2>
         <ul class="theme-setting">
-          <li><button class="enabled"><light-mode-icon></light-mode-icon></button></li>
-          <li><button><dark-mode-icon></dark-mode-icon></button></li>
-          <li><button><system-mode-icon></system-mode-icon></button></li>
+          <li><button @click=${this.handleDarkModeToggle} name="light" class="${ Store.darkMode === 'light' ? 'enabled' : '' }"><light-mode-icon inert></light-mode-icon></button></li>
+          <li><button @click=${this.handleDarkModeToggle} name="dark" class="${ Store.darkMode === 'dark' ? 'enabled' : '' }"><dark-mode-icon inert></dark-mode-icon></button></li>
+          <li><button @click=${this.handleDarkModeToggle} name="system" class="${ Store.darkMode === 'system' ? 'enabled' : '' }"><system-mode-icon inert></system-mode-icon></button></li>
         </ul>
       </aside>
     `;

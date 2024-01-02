@@ -1,3 +1,26 @@
+@media ( prefers-color-scheme:dark ) {
+  :root {
+    --light: ;
+    --dark: initial;
+  }
+}
+
+@media ( prefers-color-scheme:light ) {
+  :root {
+    --light: initial;
+    --dark: ;
+  }
+}
+
+:root[data-theme="light"] {
+  --light: initial;
+  --dark: ;
+}
+
+:root[data-theme="dark"] {
+  --light: ;
+  --dark: initial;
+}
 
 
 :root {

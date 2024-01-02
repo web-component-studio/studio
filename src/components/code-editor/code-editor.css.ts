@@ -15,7 +15,7 @@ export default css`
 }
 
 .cm-editor {
-  background: #fff;
+  background: var(--light, #fff) var(--dark, var(--studio-color-background));
   min-height: 100%;
 }
 `;

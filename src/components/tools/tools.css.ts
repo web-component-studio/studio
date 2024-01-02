@@ -21,7 +21,7 @@ export default css`
   border-inline-start: 2px solid var(--studio-color-gray-100);
   height: 100%;
   height: 100%;
-  background: #fff;
+  background: var(--light, #fff) var(--dark, var(--studio-color-background));
 }
 
 .toolbar button {
@@ -65,7 +65,7 @@ export default css`
 
 .tools-panel {
   display: none;
-  background: #fff;
+  background: var(--light, #fff) var(--dark, var(--studio-color-background));
   position: absolute;
   border-left: 2px solid var(--studio-color-gray-100);
   z-index: 2;

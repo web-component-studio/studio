@@ -48,6 +48,7 @@ iframe {
   animation: fadeIn ease-in 1s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  background: var(--studio-color-background-subdued);
 }
 
 @keyframes fadeIn {
