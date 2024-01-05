@@ -6,6 +6,10 @@ import { findUp } from 'find-up';
 
 import lib from '../lib/index.js';
 
+// set production mode for Vite to prevent dev Lit builds
+// from being imported
+process.env.NODE_ENV = 'production';
+
 const showUsage = () => {
   console.log(
     commandLineUsage([

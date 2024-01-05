@@ -1,4 +1,6 @@
 import { LitElement, html } from 'lit';
+import { Store } from '../../store/store';
+import { compressParams } from '../../utils';
 import { customElement } from 'lit/decorators.js';
 import panelSharedStyles from '../../assets/styles/panel-shared.css';
 import sharedStyles from '../../assets/styles/shared.css';
@@ -20,10 +22,13 @@ export class StudioPreviewPanel extends LitElement {
     previewPanelStyles
   ];
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    Store.attach(this)
+  }
+
   get previewUrl():string {
-    const currentPath = new URL(window.location.href);
-    currentPath.pathname = '/preview/'
-    return currentPath.toString();
+    return `/preview/?env=${compressParams({mode: Store.darkMode, code: Store.code})}`;
   }
 
   copyPreviewUrl() {

@@ -18,7 +18,7 @@ export default css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-inline-start: 2px solid var(--studio-color-gray-100);
+  border-inline-start: 2px solid var(--studio-color-background-subdued);
   height: 100%;
   height: 100%;
   background: var(--light, #fff) var(--dark, var(--studio-color-background));
@@ -40,7 +40,7 @@ export default css`
 }
 
 .toolbar button:hover {
-  background: var(--studio-color-blue-200);
+  background: var(--studio-color-interactive-hover);
 }
 
 .tools-icon {
@@ -67,7 +67,7 @@ export default css`
   display: none;
   background: var(--light, #fff) var(--dark, var(--studio-color-background));
   position: absolute;
-  border-left: 2px solid var(--studio-color-gray-100);
+  border-left: 2px solid var(--studio-color-background-subdued);
   z-index: 2;
   width: 300px;
   height: 100%;

@@ -17,6 +17,7 @@
     "@rollup/plugin-html": "^1.0.3",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-virtual": "^3.0.2",
+    "@uiw/codemirror-themes": "^4.21.21",
     "@web/dev-server": "^0.4.1",
     "cm6-theme-nord": "^0.2.0",
     "codemirror": "^6.0.1",

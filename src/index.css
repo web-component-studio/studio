@@ -19,7 +19,7 @@ html, body {
 .editor {
   display: grid;
   grid-template-columns: 1fr clamp(60px, 5vw, 80px);
-  border-top: 2px solid var(--studio-color-gray-100);
+  border-block-start: 2px solid var(--studio-color-background);
 }
 
 .render-outlet {

@@ -3,6 +3,7 @@ import { css } from 'lit';
 export default css`
 :host {
   padding: var(--studio-spacing-medium);
+  color: var(--studio-color-text-neutral);
 }
 
 h2 {

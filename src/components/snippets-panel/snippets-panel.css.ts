@@ -1,12 +1,16 @@
 import { css } from 'lit';
 
 export default css`
+
+:host {
+  color: var(--studio-color-text-neutral);
+}
+
 .snippet-panel-inner {
   position: absolute;
   inset: 0;
   display: grid;
   grid-template-rows: 60px 1fr;
-  background: #fff;
 }
 
 .snippet-list-container {
@@ -24,11 +28,12 @@ export default css`
 .snippet-filter {
   height: 100%;
   padding: var(--studio-spacing-2x-small);
-  border-bottom: 1px solid var(--studio-color-gray-100);
+  border-bottom: 1px solid var(--studio-color-background-subdued);
 }
 
 input {
   appearance: none;
+  background: transparent;
   height: 100%;
   width: 100%;
   border: 0;
@@ -49,7 +54,7 @@ input {
 }
 
 .snippet-list button:hover {
-  background: var(--studio-color-blue-100);
+  background: var(--studio-color-interactive-hover);
 }
 
 .snippet-name {

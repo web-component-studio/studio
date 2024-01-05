@@ -37,16 +37,16 @@
   --studio-font-weight-bold: 700;
 
   /** SPACING **/
-  --studio-spacing-3x-small: 0.125rem;
-  --studio-spacing-2x-small: 0.25rem;
-  --studio-spacing-x-small: 0.5rem;
-  --studio-spacing-small: 0.75rem;
-  --studio-spacing-medium: 1rem;
-  --studio-spacing-large: 1.25rem;
-  --studio-spacing-x-large: 1.75rem;
-  --studio-spacing-2x-large: 2.25rem;
-  --studio-spacing-3x-large: 3rem;
-  --studio-spacing-4x-large: 4.5rem;
+  --studio-spacing-3x-small: 0.125rem; /* 2px */
+  --studio-spacing-2x-small: 0.25rem; /* 4px */
+  --studio-spacing-x-small: 0.5rem; /* 8px */
+  --studio-spacing-small: 0.75rem; /* 12px */
+  --studio-spacing-medium: 1rem; /* 16px */
+  --studio-spacing-large: 1.25rem; /* 20px */
+  --studio-spacing-x-large: 1.75rem; /* 28px */
+  --studio-spacing-2x-large: 2.25rem; /* 36px */
+  --studio-spacing-3x-large: 3rem; /* 48px */
+  --studio-spacing-4x-large: 4.5rem; /* 72px */
 
   /** COLOR **/
   /** PRIMITIVES **/
@@ -89,6 +89,8 @@
   --studio-color-text-subdued: var(--light, var(--studio-color-gray-300)) var(--dark, var(--studio-color-gray-200));
   --studio-color-text-interactive: var(--light, var(--studio-color-blue-700)) var(--dark, var(--studio-color-blue-400));
 
+  --studio-color-interactive: var(--light, var(--studio-color-blue-700)) var(--dark, var(--studio-color-blue-400));
+  --studio-color-interactive-hover: var(--light, var(--studio-color-blue-200)) var(--dark, var(--studio-color-blue-700));
 
   /** EDITOR **/
   --studio-color-editor-background: var(--light, #fff) var(--dark, var(--studio-color-gray-950));

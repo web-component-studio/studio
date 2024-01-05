@@ -4,6 +4,7 @@ export default css`
 :host {
   display: block;
   padding: var(--studio-spacing-medium);
+  color: var(--studio-color-text-neutral);
 }
 
 h2 {
@@ -37,7 +38,7 @@ ul {
 
 .theme-setting button.enabled,
 .theme-setting button:not(.enabled):hover {
-  background: var(--studio-color-blue-200);
+  background: var(--studio-color-interactive-hover);
 }
 
 .theme-setting button * {

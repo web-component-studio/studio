@@ -1,4 +1,5 @@
 import studioConfig from './config/config';
+import { Store } from './store/store';
 
 import './components/code-editor/code-editor';
 import './components/tools/tools';
@@ -27,11 +28,7 @@ import './components/stack/stack';
 // dynamic import for chunking
 import('./components');
 
+// only set an initial if its not set to 'system'
+// system mode won't set any theme attribute for the studio app itself
+document.documentElement.dataset.theme = Store.darkMode !== 'system' ? Store.darkMode : undefined;
 
-
-// set initial dark mode
-if(studioConfig.initialMode) {
-  // only set an initial if its not set to 'system'
-  // system mode won't set any theme attribute for the studio app itself
-  document.documentElement.dataset.theme = studioConfig.initialMode !== 'system' ? studioConfig.initialMode : undefined;
-}

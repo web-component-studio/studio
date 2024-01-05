@@ -1,6 +1,5 @@
 import { html, render } from 'lit-html';
 import studioConfig from '../../config/config';
-import { Store } from '../../store/store';
 import { decompressFromEncodedURIComponent } from '../../utils/lz-string';
 import './frame.css';
 import '../error/error';
@@ -20,7 +19,6 @@ try {
 
   // call darkModeCallback if defined
   if(typeof studioConfig.darkModeCallback === 'function') {
-    console.log('FRAME.TS: ', mode);
     studioConfig.darkModeCallback(mode);
   }
   // only try to render if parsedCode actually has content

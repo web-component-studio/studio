@@ -15,7 +15,7 @@ import {
   highlightActiveLine,
   keymap
 } from '@codemirror/view';
-import { EditorState } from '@codemirror/state';
+import { EditorState, Compartment } from '@codemirror/state';
 import { foldGutter, indentOnInput, syntaxHighlighting, defaultHighlightStyle, bracketMatching, foldKeymap } from '@codemirror/language';
 import { history, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands';
 import { highlightSelectionMatches, searchKeymap } from '@codemirror/search';
@@ -27,19 +27,24 @@ import { parseMixed } from '@lezer/common';
 import { htmlPlain, autoCloseTags, htmlLanguage, htmlCompletionSourceWith } from '@codemirror/lang-html';
 import { javascriptLanguage } from '@codemirror/lang-javascript';
 
-import { studioTheme } from './studio-theme';
+import { noctisLilac } from './studio-light-theme';
+import { tokyoNightStorm } from './studio-dark-theme';
 
 import codeEditorStyles from './code-editor.css';
 
 const litHtml = () => {
   const lang = htmlPlain.configure({
     dialect: 'selfClosing',
-    wrap: parseMixed((node) => {
+    wrap: parseMixed((node, input) => {
       const isEmptyNode = () => node.to - node.from <= 2;
-
       if(node.name === 'Text') {
-        return {
-          parser: javascriptLanguage.parser
+        const textOfNode = input.read(node.from, node.to);
+        if(textOfNode.startsWith('${')) {
+          return {
+            parser: javascriptLanguage.parser
+          }
+        } else {
+          return null;
         }
       } else if(node.name === 'AttributeValue' && !isEmptyNode()) {
         return {
@@ -57,6 +62,59 @@ const litHtml = () => {
   ]);
 }
 
+const theme = new Compartment;
+
+const debouncedUpdate = debounce((update: any) => {
+  Store.code = update.state.doc.toString();
+}, 500);
+
+const studioEditorState = EditorState.create({
+  doc: Store.code,
+  extensions: [
+    lineNumbers(),
+    highlightActiveLineGutter(),
+    highlightSpecialChars(),
+    history(),
+    foldGutter({
+      openText: '—',
+      closedText: '+'
+    }),
+    drawSelection(),
+    dropCursor(),
+    EditorState.allowMultipleSelections.of(true),
+    indentOnInput(),
+    syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+    bracketMatching(),
+    closeBrackets(),
+    autocompletion(),
+    rectangularSelection(),
+    crosshairCursor(),
+    highlightActiveLine(),
+    highlightSelectionMatches(),
+    keymap.of([
+        ...closeBracketsKeymap,
+        ...defaultKeymap,
+        ...searchKeymap,
+        ...historyKeymap,
+        ...foldKeymap,
+        ...completionKeymap,
+        ...lintKeymap,
+        indentWithTab
+    ]),
+    EditorView.lineWrapping,
+    // langHtml({ extraTags: hints, autoCloseTags: true }),
+    litHtml(),
+    // studioTheme,
+    theme.of(Store.darkMode === 'dark' ? tokyoNightStorm : noctisLilac),
+    EditorView.updateListener.of((update: any) => {
+      Store.cursorPos = update.state.selection.main.head;
+      if(update.docChanged) {
+        debouncedUpdate(update);
+      }
+    })
+  ],
+})
+
 declare global {
   interface HTMLElementTagNameMap {
     'code-editor': CodeEditor
@@ -69,58 +127,29 @@ export class CodeEditor extends LitElement {
 
   @query('#code-mirror-parent') editorParent?: HTMLTextAreaElement;
 
-  firstUpdated() {
-    const debouncedUpdate = debounce((update: any) => {
-      Store.code = update.state.doc.toString();
-    }, 500);
+  connectedCallback(): void {
+    super.connectedCallback();
+    Store.attach(this);
+  }
 
+  firstUpdated() {
     Store.editor = new EditorView({
-      doc: Store.code,
-      extensions: [
-        lineNumbers(),
-        highlightActiveLineGutter(),
-        highlightSpecialChars(),
-        history(),
-        foldGutter({
-          openText: '—',
-          closedText: '+'
-        }),
-        drawSelection(),
-        dropCursor(),
-        EditorState.allowMultipleSelections.of(true),
-        indentOnInput(),
-        syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-        bracketMatching(),
-        closeBrackets(),
-        autocompletion(),
-        rectangularSelection(),
-        crosshairCursor(),
-        highlightActiveLine(),
-        highlightSelectionMatches(),
-        keymap.of([
-            ...closeBracketsKeymap,
-            ...defaultKeymap,
-            ...searchKeymap,
-            ...historyKeymap,
-            ...foldKeymap,
-            ...completionKeymap,
-            ...lintKeymap,
-            indentWithTab
-        ]),
-        EditorView.lineWrapping,
-        // langHtml({ extraTags: hints, autoCloseTags: true }),
-        litHtml(),
-        studioTheme,
-        EditorView.updateListener.of((update: any) => {
-          Store.cursorPos = update.state.selection.main.head;
-          if(update.docChanged) {
-            debouncedUpdate(update);
-          }
-        })
-      ],
+      state: studioEditorState,
       parent: this.editorParent
     });
   }
+
+  // willUpdate() {
+  //   if(Store.darkMode === 'dark') {
+  //     Store.editor?.dispatch({
+  //       effects: theme.reconfigure(theme.of(tokyoNightStorm))
+  //     });
+  //   } else if(Store.darkMode === 'light') {
+  //     Store.editor?.dispatch({
+  //       effects: theme.reconfigure(theme.of(noctisLilac))
+  //     });
+  //   }
+  // }
 
   render() {
     return html`

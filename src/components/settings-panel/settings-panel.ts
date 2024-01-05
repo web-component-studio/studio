@@ -32,6 +32,8 @@ export class StudioSettingsPanel extends LitElement {
     } else {
       delete document.documentElement.dataset.theme;
     }
+
+    // set localStorage
     Store.darkMode = newMode;
   }
 

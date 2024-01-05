@@ -39,26 +39,18 @@ class StudioStore extends Observable {
     // check code param first
     // check local storage
     if(urlEnv) {
-      const {code, widths} = JSON.parse(decompressFromEncodedURIComponent(String(urlEnv)) ?? (studioConfig.exampleCode || '<button>Im a button</button>'));
-      if(code) {
-        // set code from param if present
-        this.#state.code = code;
-      } else {
-        this.#state.code = studioConfig.exampleCode || '<button>Im a button</button>';
-      }
+      const {code, widths, mode} = JSON.parse(decompressFromEncodedURIComponent(String(urlEnv)) ?? (studioConfig.exampleCode || '<button>Im a button</button>'));
+      // set intiial state
+      this.#state.code = code ? code : studioConfig.exampleCode || '';
+      this.#state.darkMode = mode ? mode : studioConfig.initialMode || 'light';
+      this.#state.visibleWidths = widths ? widths: this.#state.visibleWidths;
 
-      if(widths) {
-        this.#state.visibleWidths = widths;
-      }
-    } else  if(fromStorage) {
-      const {code, widths} = JSON.parse(decompressFromEncodedURIComponent(String(fromStorage)) ?? '');
-
-      if(code) {
-        // set code from param if present
-        this.#state.code = code;
-      } else {
-        this.#state.code = studioConfig.exampleCode || '<button>Im a button</button>';
-      }
+    } else if(fromStorage) {
+      const {code, widths, mode} = JSON.parse(decompressFromEncodedURIComponent(String(fromStorage)) ?? '');
+      // set intiial state
+      this.#state.code = code ? code : studioConfig.exampleCode || '';
+      this.#state.darkMode = mode ? mode : studioConfig.initialMode || 'light';
+      this.#state.visibleWidths = widths ? widths: this.#state.visibleWidths;
 
     }
   }
@@ -76,7 +68,7 @@ class StudioStore extends Observable {
   set code(newCode: string) {
     this.#state.code = newCode;
 
-    const compressed = compressParams({ code: newCode });
+    const compressed = compressParams({ code: newCode, mode: this.#state.darkMode });
 
     // save to localStorage
     bag.store(compressed);
@@ -100,16 +92,6 @@ class StudioStore extends Observable {
     this.notify();
   }
 
-  toggleAvailableWidth(incWidth: number) {
-    if(this.#state.visibleWidths.includes(incWidth)) {
-      // splice out width
-      this.#state.visibleWidths = this.#state.visibleWidths.filter(width => width !== incWidth).sort(sortWidths);
-    } else {
-      this.#state.visibleWidths = [...this.#state.visibleWidths, incWidth].sort(sortWidths);
-    }
-    this.notify();
-  }
-
   get paramType(){
     return this.#state.paramType;
   }
@@ -126,7 +108,25 @@ class StudioStore extends Observable {
   }
   set darkMode(newMode: string) {
     this.#state.darkMode = newMode;
-    console.log('STORE: ', this.#state.darkMode);
+
+    const compressed = compressParams({ code: this.#state.code, mode: newMode });
+
+    // save to localStorage
+    bag.store(compressed);
+
+    // replace history
+    history.pushState(null,'', `/?env=${compressed}`);
+
+    this.notify();
+  }
+
+  toggleAvailableWidth(incWidth: number) {
+    if(this.#state.visibleWidths.includes(incWidth)) {
+      // splice out width
+      this.#state.visibleWidths = this.#state.visibleWidths.filter(width => width !== incWidth).sort(sortWidths);
+    } else {
+      this.#state.visibleWidths = [...this.#state.visibleWidths, incWidth].sort(sortWidths);
+    }
     this.notify();
   }
 

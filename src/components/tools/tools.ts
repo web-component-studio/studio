@@ -33,9 +33,28 @@ export class StudioTools extends LitElement {
     if(this.currentPanel === panelName){
       this.currentPanel = undefined;
       this.panelOpen = false;
+
+      // remove event listener
+      document.body.removeEventListener('click', this.handleBodyClick.bind(this));
     } else {
       this.currentPanel = panelName;
       this.panelOpen = true;
+
+      // add body click event listener
+      document.body.addEventListener('click', this.handleBodyClick.bind(this));
+    }
+
+  }
+
+  handleBodyClick(event) {
+
+    if(!event.composedPath().includes(this)) {
+      //  a click has registered outside the tools panel, so
+      // close whichever panel is open
+      this.currentPanel = undefined;
+      this.panelOpen = false;
+
+      document.body.removeEventListener('click', this.handleBodyClick);
     }
   }
 

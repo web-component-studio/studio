@@ -18,4 +18,9 @@ export default css`
   background: var(--light, #fff) var(--dark, var(--studio-color-background));
   min-height: 100%;
 }
+
+.cm-focused .cm-matchingBracket,
+.cm-focused .cm-nonmatchingBracket {
+  background: transparent !important;
+}
 `;

@@ -35,7 +35,7 @@ interface StudioConfig {
   customHints?: string;
   outputPath?: string;
   title?: string;
-  paramType?: 'hash' | 'search';
+  paramType: 'hash' | 'search';
   darkModeCallback?: (mode: string) => void;
   initialMode?: 'light' | 'dark' | 'system';
   publicAssetsRoots?: PublicAssetRootConfig[],

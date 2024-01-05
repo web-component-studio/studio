@@ -10,11 +10,11 @@ export default css`
 }
 
 .frames-container {
-  padding: 48px;
+  padding: var(--studio-spacing-3x-large);
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 48px;
+  gap: var(--studio-spacing-3x-large);
   min-width: calc(100vw - 96px);
 }
 
@@ -27,6 +27,11 @@ export default css`
   flex-direction: column;
   gap: 8px;
   color: var(--studio-color-text-subdued);
+}
+
+/* only apply padding to the last item if not in a centered layout */
+:not(.centered) .frame:last-child {
+  padding-inline-end: var(--studio-spacing-3x-large);
 }
 
 .frame .frame-width {

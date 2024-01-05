@@ -21,13 +21,13 @@ export default css`
 .handle {
   z-index: 2;
   position: absolute;
-  background: white;
+  background: var(--light, white) var(--dark, var(--studio-color-background));
   top: -4px;
   left: 50%;
   transform: translateX(-50%);
   width: 5%;
   height: 8px;
   border-radius: 9999px;
-  border: 2px solid var(--studio-color-gray-100);
+  border: 2px solid var(--studio-color-background-subdued);
 }
 `;

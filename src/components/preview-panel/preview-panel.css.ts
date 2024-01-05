@@ -4,6 +4,7 @@ export default css`
 :host {
   display: block;
   padding: var(--studio-spacing-medium);
+  color: var(--studio-color-text-neutral);
 }
 
 h2 {
