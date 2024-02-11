@@ -5,7 +5,7 @@ export default css`
   display: block;
   position: relative;
   resize: both;
-  min-height: 25vh;
+  min-height: 33vh;
   max-height: 75vh;
   isolation: isolate;
 }

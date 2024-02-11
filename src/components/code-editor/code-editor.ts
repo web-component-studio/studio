@@ -19,7 +19,7 @@ import { EditorState, Compartment } from '@codemirror/state';
 import { foldGutter, indentOnInput, syntaxHighlighting, defaultHighlightStyle, bracketMatching, foldKeymap } from '@codemirror/language';
 import { history, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands';
 import { highlightSelectionMatches, searchKeymap } from '@codemirror/search';
-import { closeBrackets, autocompletion, closeBracketsKeymap, completionKeymap } from '@codemirror/autocomplete';
+import { closeBrackets, autocompletion, closeBracketsKeymap, completionKeymap, startCompletion } from '@codemirror/autocomplete';
 import { lintKeymap } from '@codemirror/lint';
 import { EditorView } from 'codemirror';
 import { LanguageSupport } from '@codemirror/language';
@@ -62,11 +62,34 @@ const litHtml = () => {
   ]);
 }
 
-const theme = new Compartment;
-
 const debouncedUpdate = debounce((update: any) => {
   Store.code = update.state.doc.toString();
 }, 500);
+
+const theme = new Compartment;
+
+const handleDarkMode = () => {
+  if(Store.darkMode === 'dark') {
+    return tokyoNightStorm;
+  } else if(Store.darkMode === 'light') {
+    return noctisLilac;
+  } else {
+    const darkMode = matchMedia('(prefers-color-scheme: dark)');
+    if(darkMode.matches) {
+      return tokyoNightStorm;
+    } else {
+      return noctisLilac;
+    }
+  }
+}
+
+// completionKeymap.unshift({key: "Space", run: (target) => {
+//   setTimeout(() => {
+//     startCompletion(target);
+//   }, 1)
+//   return true;
+// } });
+
 
 const studioEditorState = EditorState.create({
   doc: Store.code,
@@ -86,7 +109,11 @@ const studioEditorState = EditorState.create({
     syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
     bracketMatching(),
     closeBrackets(),
-    autocompletion(),
+    autocompletion({
+      icons: false,
+      closeOnBlur: false,
+      optionClass: () => 'studio-completion-option'
+    }),
     rectangularSelection(),
     crosshairCursor(),
     highlightActiveLine(),
@@ -97,15 +124,12 @@ const studioEditorState = EditorState.create({
         ...searchKeymap,
         ...historyKeymap,
         ...foldKeymap,
-        ...completionKeymap,
         ...lintKeymap,
         indentWithTab
     ]),
     EditorView.lineWrapping,
-    // langHtml({ extraTags: hints, autoCloseTags: true }),
     litHtml(),
-    // studioTheme,
-    theme.of(Store.darkMode === 'dark' ? tokyoNightStorm : noctisLilac),
+    theme.of(handleDarkMode()),
     EditorView.updateListener.of((update: any) => {
       Store.cursorPos = update.state.selection.main.head;
       if(update.docChanged) {
@@ -113,7 +137,7 @@ const studioEditorState = EditorState.create({
       }
     })
   ],
-})
+});
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -139,17 +163,29 @@ export class CodeEditor extends LitElement {
     });
   }
 
-  // willUpdate() {
-  //   if(Store.darkMode === 'dark') {
-  //     Store.editor?.dispatch({
-  //       effects: theme.reconfigure(theme.of(tokyoNightStorm))
-  //     });
-  //   } else if(Store.darkMode === 'light') {
-  //     Store.editor?.dispatch({
-  //       effects: theme.reconfigure(theme.of(noctisLilac))
-  //     });
-  //   }
-  // }
+  willUpdate() {
+    // "system" mode is detected with matchMedia and not needed to be checked here
+    if(Store.darkMode === 'dark') {
+      Store.editor?.dispatch({
+        effects: theme.reconfigure(tokyoNightStorm)
+      });
+    } else if(Store.darkMode === 'light') {
+      Store.editor?.dispatch({
+        effects: theme.reconfigure(noctisLilac)
+      });
+    } else {
+      const darkMode = matchMedia('(prefers-color-scheme: dark)');
+      if(darkMode.matches) {
+        Store.editor?.dispatch({
+          effects: theme.reconfigure(tokyoNightStorm)
+        });
+      } else {
+        Store.editor?.dispatch({
+          effects: theme.reconfigure(noctisLilac)
+        });
+      }
+    }
+  }
 
   render() {
     return html`

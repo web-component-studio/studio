@@ -1,6 +1,6 @@
 @media ( prefers-color-scheme:dark ) {
   :root {
-    --light: ;
+    --light: /**/;
     --dark: initial;
   }
 }
@@ -8,25 +8,22 @@
 @media ( prefers-color-scheme:light ) {
   :root {
     --light: initial;
-    --dark: ;
+    --dark: /**/;
   }
 }
 
 :root[data-theme="light"] {
   --light: initial;
-  --dark: ;
+  --dark: /**/;
 }
 
 :root[data-theme="dark"] {
-  --light: ;
+  --light: /**/;
   --dark: initial;
 }
 
 
 :root {
-
-  --light: initial;
-  --dark: ;
 
   /** TYPE **/
   --studio-font-body: 'Noto Sans', sans-serif;

@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import resizableStyles from './resizable.css';
-
+import { vh } from '../../utils/index.js';
 
 @customElement('resizable-element')
 class ResizableElement extends LitElement {
@@ -16,16 +16,19 @@ class ResizableElement extends LitElement {
     `;
   }
 
-  handleTopMouseDown(e) {
+  handleTopMouseDown(e: MouseEvent) {
+    // only left clicks should resize
+    if(e.button != 0) {
+      return;
+    }
+
     const startY = e.clientY;
     const startHeight = this.offsetHeight;
-    const startTop = this.offsetTop;
 
     const handleMouseMove = (e) => {
       const newHeight = startHeight + startY - e.clientY;
-      const newTop = startTop - startY + e.clientY;
 
-      this.style.height = `${newHeight}px`;
+      this.style.height = `${newHeight < vh(33) ? vh(33) : newHeight}px`;
     };
 
     const handleMouseUp = () => {
@@ -36,7 +39,6 @@ class ResizableElement extends LitElement {
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
   }
-
 
 }
 

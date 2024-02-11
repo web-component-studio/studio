@@ -29,3 +29,8 @@ export const compressParams = ({ code, widths, mode }:CompressParamsOptions) => 
 export const sortWidths = (a:number, b:number):number => {
   return a-b;
 }
+
+export const vh = (percent: number) => {
+  var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  return (percent * h) / 100;
+}

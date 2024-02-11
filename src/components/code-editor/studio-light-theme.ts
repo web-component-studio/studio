@@ -6,7 +6,7 @@ export const defaultSettingsNoctisLilac: CreateThemeOptions['settings'] = {
   foreground: '#0c006b',
   caret: '#5c49e9',
   selection: '#d5d1f2',
-  selectionMatch: 'transparent',
+  selectionMatch: '#d5d1f2',
   gutterBackground: '#f2f1f8',
   gutterForeground: '#0c006b70',
   lineHighlight: '#16067911',

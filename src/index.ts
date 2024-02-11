@@ -30,5 +30,7 @@ import('./components');
 
 // only set an initial if its not set to 'system'
 // system mode won't set any theme attribute for the studio app itself
-document.documentElement.dataset.theme = Store.darkMode !== 'system' ? Store.darkMode : undefined;
+if(Store.darkMode !== 'system') {
+  document.documentElement.dataset.theme = Store.darkMode;
+}
 

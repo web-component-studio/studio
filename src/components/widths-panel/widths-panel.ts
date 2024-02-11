@@ -32,7 +32,7 @@ export class StudioWidthsPanel extends LitElement {
         <ul>
           ${Store.allWidths.map((width) => {
             return html`<li>
-              <input @change=${this.handleWidthSelect} id="${`width-${width}-select`}" type="checkbox" value=${width} checked/>
+              <input @change=${this.handleWidthSelect} id="${`width-${width}-select`}" type="checkbox" value=${width} ?checked=${Store.visibleWidths.includes(width)} />
               <label for="${`width-${width}-select`}">${width}</label>
             </li>`
           })}
