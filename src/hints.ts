@@ -1,2 +1,2 @@
-import { default as hints } from '__STUDIO_CUSTOM_HINTS__';
+const hints = __STUDIO_HINTS__;
 export { hints };

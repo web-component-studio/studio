@@ -1,12 +1,19 @@
 /// <reference types="vite/client" />
+import type { TagSpec } from "@codemirror/lang-html";
 
 interface Window {
   allRegisteredComponents: RegisteredCustomElement[]
   __studioConfig__: StudioConfig;
 }
 
+interface Hint {
+  globalAttrs: TagSpec.globalAttrs,
+  attrs: TagSpec.attrs
+}
+
 declare const __GLOBAL_STUDIO_CONFIG__: StudioConfig
 declare const __STUDIO_SNIPPETS__: Snippet[];
+declare const __STUDIO_HINTS__: Record<string, Hint>;
 
 interface FullDarkModeConfig {
   default: 'light' | 'dark';
@@ -32,6 +39,11 @@ interface PublicAssetRootConfig {
 
 interface StudioConfig {
   components: string;
+  componentManifest?: {
+    path: string;
+    classNameFilter?: string;
+    globalAttrs?: boolean;
+  },
   customHints?: string;
   outputPath?: string;
   title?: string;
