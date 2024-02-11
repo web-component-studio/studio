@@ -1,6 +1,6 @@
 {
   "name": "wc-studio",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "type": "module",
   "description": "Design with web components. Assemble your pallette, paint your thoughts in the browser",
   "bin": {
